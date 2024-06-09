@@ -854,9 +854,9 @@ namespace SomerenUI
                     Student selectedStudent = (Student)comboBoxParticipators.SelectedItem;
                     ActivityService activityService = new ActivityService();
 
-                    List<ActivityParticipants> activityParticipantsList = activityService.GetActivityParticipatants(activity.ActivityID, date);
+                    List<SomerenModel.ActivityParticipants> activityParticipantsList = activityService.GetActivityParticipatants(activity.ActivityID, date);
 
-                    foreach (ActivityParticipants activityParticipant in activityParticipantsList)
+                    foreach (SomerenModel.ActivityParticipants activityParticipant in activityParticipantsList)
                     {
                         if (activityParticipant.StudentID == selectedStudent.StudentId)
                         {
@@ -884,7 +884,7 @@ namespace SomerenUI
             {
                 DateTime date = dateTimePickerActivity.Value;
                 Activity activity = (Activity)listViewActivities.SelectedItems[0].Tag;
-                ActivityParticipants selectedStudent = (ActivityParticipants)listBoxParticipators.SelectedItem;
+                SomerenModel.ActivityParticipants selectedStudent = (SomerenModel.ActivityParticipants)listBoxParticipators.SelectedItem;
                 ActivityService activityService = new ActivityService();
 
                 if (MessageBox.Show("Are you sure to remove Participant?", "Remove Participant", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -907,11 +907,11 @@ namespace SomerenUI
         {
             comboBoxParticipators.SelectedItem = null;
             ActivityService activityService = new ActivityService();
-            List<ActivityParticipants> activityParticipantsList = activityService.GetActivityParticipatants(activityID, activityDate);
+            List<SomerenModel.ActivityParticipants> activityParticipantsList = activityService.GetActivityParticipatants(activityID, activityDate);
 
             listBoxParticipators.Items.Clear();
 
-            foreach (ActivityParticipants activityParticipants in activityParticipantsList)
+            foreach (SomerenModel.ActivityParticipants activityParticipants in activityParticipantsList)
             {
                 listBoxParticipators.Items.Add(activityParticipants);
             }
@@ -979,6 +979,11 @@ namespace SomerenUI
         }
 
         private void btnAddStudent_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void activityParticipantsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

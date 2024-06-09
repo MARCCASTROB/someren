@@ -33,5 +33,15 @@ namespace SomerenService
         {
             studentdb.AddNewStudent(studentNewData);
         }
+        //participants 
+        public void Addparticipant(Student student, Activity activity)
+        {
+            StudentDao.Addparticipant(student, activity);
+        }
+
+        public void DeleteParticipant(Student student, Activity activity)
+        {
+            StudentDao.DeleteParticipant(student, activity);
+        }
     }
 }
