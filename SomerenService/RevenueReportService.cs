@@ -19,7 +19,8 @@ namespace SomerenService
 
         public List<RevenueReport> GenerateRevenueReport(DateTime startDate, DateTime endate)
         {
-             return revenueReportDao.GetRevenueRecords( startDate,  endate);             
+             return revenueReportDao.GetRevenueRecords( startDate,  endate);   
         }
+        
     }
 }

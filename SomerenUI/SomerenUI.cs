@@ -930,7 +930,7 @@ namespace SomerenUI
                 listBoxSupervisors.Items.Add(activitySupervisors);
             }
         }
-
+        // revenue report 
         private void checkBoxActivateAllDates_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxActivateAllDates.Checked == true)

@@ -2,11 +2,12 @@
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Collections.Generic;
 
 
 namespace SomerenDAL
 {
-    public abstract class BaseDao
+    public abstract class BaseDao<Getall>
     {
         private SqlDataAdapter adapter;
         private SqlConnection conn;
@@ -16,7 +17,29 @@ namespace SomerenDAL
                 conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SomerenDatabase"].ConnectionString);
                 adapter = new SqlDataAdapter();             
         }
+        // get all query 
+        public List<Getall> GetAll()
+        {
+            SqlParameter[] sqlParameters = Array.Empty<SqlParameter>();
+            return ReadTables(ExecuteSelectQuery(GetAllQuery(), sqlParameters));
+        }
 
+        protected List<Getall> ReadTables(DataTable dataTable)
+        {
+            List<Getall> items = new();
+
+            foreach (DataRow reader in dataTable.Rows)
+            {
+                Getall item = ConvertItem(reader);
+                items.Add(item);
+            }
+
+            return items;
+        }
+
+        internal protected abstract Getall ConvertItem(DataRow reader);
+
+        private protected abstract string GetAllQuery();
         protected SqlConnection OpenConnection()
         {
             try
@@ -84,7 +107,7 @@ namespace SomerenDAL
                 CloseConnection();
             }
         }
-
+            
         /* For Select Queries */
         protected DataTable ExecuteSelectQuery(string query, params SqlParameter[] sqlParameters)
         {
